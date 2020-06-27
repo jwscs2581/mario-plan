@@ -7,15 +7,14 @@ import {createStore, applyMiddleware, compose } from 'redux'
 import {Provider} from 'react-redux'
 import rootReducer from './store/reducers/rootReducer'
 import thunk from 'redux-thunk';
-// import {reduxFirestore, getFirestore} from 'redux-firestore';
 import { createFirestoreInstance } from 'redux-firestore'
-// import {reactReduxFirebase, getFirebase} from 'react-redux-firebase';
 import { ReactReduxFirebaseProvider, getFirebase } from 'react-redux-firebase'
 import {firebaseConfig} from './config/fbConfig';
 import firebase from 'firebase/app'
+import 'firebase/firestore'
 
 firebase.initializeApp(firebaseConfig);
-firebase.firestore().settings({timestampsInSnapshots: true})
+firebase.firestore()
 
 const store = createStore(rootReducer,
   compose(
