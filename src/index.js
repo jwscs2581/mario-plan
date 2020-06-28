@@ -27,7 +27,8 @@ const store = createStore(
 );
 
 const rrfConfig = {
-  // userProfile: 'users',
+  userProfile: 'users',
+  useFirestoreForProfile: true
 };
 const rrfProps = {
   firebase,

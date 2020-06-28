@@ -1,8 +1,12 @@
 import React, { useState } from "react";
-import { useFirebase, isLoaded, isEmpty } from "react-redux-firebase";
+import { useFirebase } from "react-redux-firebase";
 import { useHistory } from "react-router-dom";
+import { Redirect } from "react-router-dom"
+import {useSelector} from 'react-redux'
+import { isLoaded, isEmpty } from 'react-redux-firebase'
 
 export function SignIn() {
+  const auth = useSelector((state) => state.firebase.auth)
   const [pw, setPw] = useState();
   const [email, setEmail] = useState();
   const firebase = useFirebase();
@@ -13,9 +17,9 @@ export function SignIn() {
     //TODO handle error
     firebase
       .login({ email: email, password: pw })
-      .then(() => history.push("/"));
   };
 
+  if(isLoaded(auth) && !isEmpty(auth)) return <Redirect to="/" /> 
   return (
     <div className="container">
       <form onSubmit={handleSubmit} className="white">

@@ -1,6 +1,9 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { useFirestoreConnect } from "react-redux-firebase";
+import {
+  useParams
+} from "react-router-dom";
 
 const ProjectDetails = (props) => {
   const id = props.match.params.id;

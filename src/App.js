@@ -6,22 +6,19 @@ import ProjectDetails from './components/projects/ProjectDetails';
 import SignIn from './components/auth/SignIn';
 import SignUp from './components/auth/SignUp';
 import CreateProject from './components/projects/CreateProject';
-
+import PrivateRoute from './components/auth/PrivateRoute'
 
 function App() {
-  
-
-
   return (
     <BrowserRouter>
       <div className="App">
         <Navbar />
         <Switch>
-          <Route exact path='/' component={Dashboard} />
-          <Route path='/project/:id' component={ProjectDetails} />
+          <PrivateRoute exact path='/' component={Dashboard} />
+          <PrivateRoute path='/project/:id' component={ProjectDetails} />
           <Route path='/signin' component={SignIn} />
           <Route path='/signup' component={SignUp} />
-          <Route path='/create' component={CreateProject} />
+          <PrivateRoute path='/create' component={CreateProject} />
         </Switch>
       </div>
     </BrowserRouter>
