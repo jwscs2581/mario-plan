@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import { useFirestoreConnect } from "react-redux-firebase";
 import { useFirestore } from "react-redux-firebase";
+import {useSelector} from 'react-redux';
+import {useHistory} from 'react-router-dom';
 
 export function CreateProject() {
   const [title, setTitle] = useState();
   const [content, setContent] = useState();
   const firestore = useFirestore();
-
+  const profile = useSelector(state => state.firebase.profile)
+  const uid = useSelector(state => state.firebase.auth.uid)
+  const history = useHistory();
   useFirestoreConnect([{ collection: "projects" }]);
 
   const handleSubmit = (e) => {
@@ -15,11 +19,12 @@ export function CreateProject() {
       firestore.collection("projects").add({
         title: title,
         content: content,
-        authorId: 12345,
-        authorFirstName: "Rusty",
-        authorLastName: "ShackledFord",
+        authorId: uid,
+        authorFirstName: profile.firstName,
+        authorLastName: profile.lastName,
         createdAt: new Date(),
       });
+      history.push('/')
     } catch (err) {
       console.log("something bad happened", err);
     }

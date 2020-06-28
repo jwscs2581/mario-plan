@@ -1,9 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { useFirestoreConnect } from "react-redux-firebase";
-import {
-  useParams
-} from "react-router-dom";
+import moment from 'moment'
 
 const ProjectDetails = (props) => {
   const id = props.match.params.id;
@@ -17,6 +15,7 @@ const ProjectDetails = (props) => {
     ({ firestore: { data } }) => data.projects && data.projects[id]
   );
 
+  const displayDate = project.createdAt ? project.createdAt.toDate() : new Date();
   return (
     <>
       {project ? (
@@ -34,7 +33,7 @@ const ProjectDetails = (props) => {
                   ? `${project.authorFirstName} ${project.authorLastName}`
                   : "Unknown"
               }`}</div>
-              <div>May 5th, 3am</div>
+              <div>{moment(displayDate).calendar()}</div>
             </div>
           </div>
         </div>
