@@ -6,9 +6,12 @@ import ProjectDetails from './components/projects/ProjectDetails';
 import SignIn from './components/auth/SignIn';
 import SignUp from './components/auth/SignUp';
 import CreateProject from './components/projects/CreateProject';
-import {useSelelector} from 'react-redux';
+
+
 function App() {
   
+
+
   return (
     <BrowserRouter>
       <div className="App">
